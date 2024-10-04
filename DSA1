@@ -1,0 +1,103 @@
+import java.util.Scanner;
+class MyClass {
+int[] a;
+int n;
+public void input() {
+Scanner sc = new Scanner(System.in);
+System.out.print("Enter total number of students: ");
+n = sc.nextInt();
+a = new int[n];
+System.out.println("Enter marks of all students (-1 for absent): ");
+for (int i = 0; i < n; i++) {
+a[i] = sc.nextInt();
+}
+}
+public void calAbsent() {
+int count = 0;
+for (int i = 0; i < n; i++) {
+if (a[i] == -1) {
+count++;
+}
+}
+System.out.println("Number of absent students: " + count);
+}
+public void calAvg() {
+int sum = 0, count = 0;
+for (int i = 0; i < n; i++) {
+if (a[i] != -1) {
+sum += a[i];
+count++;
+}
+}
+if (count == 0) {
+System.out.println("No valid marks to calculate the average.");
+} else {
+double avg = (double) sum / count;
+System.out.println("Average marks of the class: " + avg);
+}
+}
+
+public void calMax() {
+int max = -1;
+for (int i = 0; i < n; i++) {
+if (a[i] != -1 && a[i] > max) {
+max = a[i];
+}
+}
+if (max == -1) {
+System.out.println("No marks available to find the maximum.");
+} else {
+System.out.println("Maximum marks: " + max);
+}
+}
+public void calMin() {
+int min = 100; // Assuming marks are out of 100
+for (int i = 0; i < n; i++) {
+if (a[i] != -1 && a[i] < min) {
+min = a[i];
+}
+}
+if (min == 100) {
+System.out.println("No marks available to find the minimum.");
+} else {
+System.out.println("Minimum marks: " + min);
+}
+}
+}
+public class Main {
+public static void main(String[] args) {
+Scanner sc = new Scanner(System.in);
+MyClass ob = new MyClass();
+ob.input(); // Input is taken once here
+while (true) {
+System.out.println("\nMenu:");
+System.out.println("1. Calculate absent students");
+System.out.println("2. Calculate average marks");
+System.out.println("3. Calculate maximum marks");
+System.out.println("4. Calculate minimum marks");
+System.out.println("5. Exit");
+System.out.print("Enter your choice: ");
+int choice = sc.nextInt();
+switch (choice) {
+case 1:
+
+ob.calAbsent();
+break;
+case 2:
+ob.calAvg();
+break;
+case 3:
+ob.calMax();
+break;
+case 4:
+ob.calMin();
+break;
+case 5:
+System.out.println("Exiting...");
+return; // Exit the program
+default:
+System.out.println("Invalid choice. Please try again.");
+}
+}
+}
+}
